@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { SafeAreaView, View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
 
-import iconImg from '../assets/icon.png';
+import iconImg from '../../assets/icon.png';
 import { Button } from '../components/Button';
 
 
@@ -21,7 +21,7 @@ export function Welcome(){
     return(
         <SafeAreaView style={style.container}>
             <Text style={style.title}>
-            Bem vindo!    
+            Bem vindo boy!    
             </Text>
 
             { 
