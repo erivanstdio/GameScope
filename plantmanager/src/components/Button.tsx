@@ -1,42 +1,42 @@
+import { Fontisto } from '@expo/vector-icons';
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, TouchableOpacityProps } from 'react-native';
+import { 
+    Text, 
+    StyleSheet, 
+    TouchableOpacity, 
+    TouchableOpacityProps
+} from 'react-native';
 
+import colors from '../styles/colors';
+import fonts from '../styles/fonts';
 
 interface ButtonProps extends TouchableOpacityProps {
     title: string;
 }
 
-export function Button({ title, ...rest } : ButtonProps){
+export function Button( {title, ...rest} : ButtonProps){
     return (
-        <TouchableOpacity 
-        style={styles.buttonAdvance}
-        activeOpacity={0.7}
-        {...rest}
-        >
-        
-        
-            <Text style={styles.buttonAdvanceText}>
-                { title }
-            </Text>
-        </TouchableOpacity>
+    <TouchableOpacity style={style.container}>    
+        <Text style={style.botaoText}>
+            {title}
+        </Text>
+    </TouchableOpacity>
     )
 }
 
-
-const styles = 
-StyleSheet.create({
-    buttonAdvance: {
-        marginTop: -90,
-        marginBottom: 20,
-        height:56,
-        width:200,
+const style = StyleSheet.create({
+    container: {
+        backgroundColor: colors.blueButtons,
+        height: 56,
+        alignItems: 'center',
         justifyContent: 'center',
-        alignItems:'center',
-        backgroundColor: '#0500FF',
         borderRadius: 16
     },
-    buttonAdvanceText: {
-        fontSize: 20,
-        color: 'white'
+    botaoText: {
+        paddingHorizontal: 20,
+        fontFamily: fonts.text,
+        fontSize: 16,
+        color: colors.white
     }
-})
+
+});

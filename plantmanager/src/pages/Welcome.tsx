@@ -1,51 +1,52 @@
-import React, { useState } from 'react';
-import { SafeAreaView, View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import React from 'react';
 
+import fonts from '../styles/fonts'
+import colors from '../styles/colors'
+
+import { 
+    SafeAreaView,  
+    Text, 
+    Image, 
+    StyleSheet, 
+    View,
+    Dimensions
+} from 'react-native';
+
+import { Entypo, Feather } from '@expo/vector-icons'
 
 import iconImg from '../../assets/icon.png';
-import { Button } from '../components/Button';
 
 
 
 export function Welcome(){
-
-
-    //esse nome é só convenção
-// função que armazena o estado e função que atualiza esse estado
-    const [visible, setVisible] = useState(false);
-
-    function handleVisibility (){
-        setVisible(true);
-    }
-
-    return(
+   
+return(
         <SafeAreaView style={style.container}>
-            <Text style={style.title}>
-            Bem vindo boy!    
-            </Text>
+            <View style={style.wrapper}>
+                <Text style={style.title}>
+                    Bem vindo!    
+                </Text>
 
-            { 
-            visible &&
-            <Image 
-            style={style.image} 
-            source={iconImg}/> 
-            }
-            <Text style={style.subtitle}>
-                Clique abaixo {'\n'} paara visitar ofertas!
-            </Text>
-{/*          
-            <TouchableOpacity style={style.button}>
-            
-            <Text style={style.buttonText}>
-            {'>'}
-            </Text>
-        
-            </TouchableOpacity>
-*/}         
-            <Button title="Mostrar imagem" 
-            onPress={handleVisibility}/>
-            {/*<Button title="Seguinte"/>*/}
-            </SafeAreaView>
+
+                <Image 
+                    style={style.image} 
+                    source={iconImg}
+                    resizeMode='contain'
+                /> 
+
+
+                <Text style={style.subtitle}>
+                    Clique abaixo {'\n'} para visitar ofertas!
+                </Text>
+
+                <View style={style.setinha}>
+                        <Feather 
+                            style={style.setinhaText}
+                            name="chevron-right"
+                        />
+                </View>
+            </View>
+        </SafeAreaView>
     )
 }
 
@@ -53,41 +54,52 @@ const style =
 StyleSheet.create({
 
     container: {
-        backgroundColor: '#1C082B',
+        backgroundColor: colors.darkPurple,
         flex: 1,
-        justifyContent: 'space-between',
+    },
+    wrapper: {
+        paddingHorizontal: 20,
+        flex: 1,
+        //extremidades não tocam a borda
+        justifyContent: 'space-around',
         alignItems: 'center'
     },
 
     image:{
-        height: 150,
-        width: 150
+        marginTop: -50,
+        marginBottom: -50,
+        // calcula a imagem de acordo com o Device em que ela aparece. 
+        // Deve receber um resizeMode="contain" na tag, para ajustar-se
+        height: Dimensions.get('window').width * 0.7
     },
 
     title: {
         marginTop:120,
+        fontFamily: fonts.heading,
         color: 'white',
         fontSize: 30,
     },
 
     subtitle: {
+        fontFamily: fonts.text,
         textAlign: 'center',
         color: 'white',
         fontSize: 20,
+        marginBottom: 30,
     },
-
-    buttonText:{
-        color: 'white',
-        fontSize: 24
-
-    },
-    button:{
+    setinha:{
         marginBottom: 80,
         height:56,
         width:56,
+        backgroundColor: colors.neonBlue,
+        borderRadius: 16,
         justifyContent: 'center',
         alignItems:'center',
-        backgroundColor: '#0500FF',
-        borderRadius: 16
+    },
+
+    setinhaText:{
+        color: 'white',
+        fontSize: 24,
     }
+
 })
