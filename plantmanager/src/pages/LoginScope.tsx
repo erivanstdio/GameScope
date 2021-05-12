@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState} from 'react';
+
 import {
     Image, 
     SafeAreaView, 
@@ -13,13 +14,13 @@ import {
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 import iconImg from '../../assets/icon.png';
-import { Entypo } from '@expo/vector-icons';
 
 
 import {Input, InputSenha} from '../components/Input';
 import { ButtonScope } from '../components/ButtonScope';
 
 export function LoginScope(){
+
     return(
         <SafeAreaView style={style.container}>
             <View style={style.wrapper}>
@@ -32,9 +33,9 @@ export function LoginScope(){
                 </Image>
 
 
-                <Input title={'email'}/>
+                <Input />
 
-                <InputSenha title={'senha'}/>
+                <InputSenha />
 
                 <TouchableOpacity>
                     <Text style={style.forgot}>Esqueceu a senha?</Text>

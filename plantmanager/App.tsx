@@ -1,11 +1,22 @@
 import React, { Fragment } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Welcome } from './src/pages/Welcome';
+import { 
+  View, 
+  Text, 
+  StyleSheet 
+} from 'react-native';
 import AppLoading from 'expo-app-loading';
-import { useFonts, Play_400Regular, 
-  Play_700Bold } from '@expo-google-fonts/play';
+import { 
+  useFonts, 
+  Play_400Regular, 
+  Play_700Bold 
+} from '@expo-google-fonts/play';
+import Routes from './src/routes';  
+  
+import { Welcome } from './src/pages/Welcome';
 import { UserIdentification } from './src/pages/UserIdentification';
 import { LoginScope } from './src/pages/LoginScope';
+import { Confirmation } from './src/pages/Confirmation';
+
 
 
 // default é utilizado só no app, pra o React entender que esse é o index
@@ -30,7 +41,7 @@ export default function App(){
         return <AppLoading/>
 
     return(
-      <LoginScope/>
+      <Routes />
     )
 }
 

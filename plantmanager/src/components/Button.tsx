@@ -12,11 +12,16 @@ import fonts from '../styles/fonts';
 
 interface ButtonProps extends TouchableOpacityProps {
     title: string;
+
 }
 
 export function Button( {title, ...rest} : ButtonProps){
     return (
-    <TouchableOpacity style={style.container}>    
+    <TouchableOpacity 
+    
+        style={style.container}
+        {...rest}
+    >        
         <Text style={style.botaoText}>
             {title}
         </Text>

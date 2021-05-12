@@ -1,26 +1,36 @@
 import React from 'react';
-
-import fonts from '../styles/fonts'
-import colors from '../styles/colors'
-
 import { 
     SafeAreaView,  
     Text, 
     Image, 
     StyleSheet, 
     View,
-    Dimensions
+    Dimensions,
+    Touchable
 } from 'react-native';
 
-import { Entypo, Feather } from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/core';
 
+import fonts from '../styles/fonts';
+import colors from '../styles/colors';
+
+
+
+import { Feather } from '@expo/vector-icons';
 import iconImg from '../../assets/icon.png';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 
 export function Welcome(){
-   
-return(
+
+    const navigation = useNavigation();
+
+    function handleStart(){
+        navigation.navigate('UserIdentification');
+    }
+
+    return(
         <SafeAreaView style={style.container}>
             <View style={style.wrapper}>
                 <Text style={style.title}>
@@ -39,12 +49,15 @@ return(
                     Clique abaixo {'\n'} para visitar ofertas!
                 </Text>
 
-                <View style={style.setinha}>
-                        <Feather 
-                            style={style.setinhaText}
-                            name="chevron-right"
-                        />
-                </View>
+                <TouchableOpacity 
+                style={style.setinha} 
+                onPress={handleStart}
+                >
+                    <Feather 
+                        style={style.setinhaText}
+                        name="chevron-right"
+                    />
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
     )

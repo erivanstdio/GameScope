@@ -1,30 +1,57 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacityProps } from 'react-native';
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 import { Entypo } from '@expo/vector-icons';
 
-
+{/*
 interface Input extends TouchableOpacityProps {
     title: string;
 }
+*/}
 
-
-export function Input({ title, ...rest }: Input) {
+export function Input() {
     return (
         <TextInput
             style={style.inputEmail}
+            placeholder="Email"
+            placeholderTextColor={colors.white}
         >
-            {title}
+            
         </TextInput>
     )
 }
 
-export function InputSenha({ title, ...rest }: Input) {
+
+export function InputSenha() {
+
+    const [isFocused, setIsFocused] = useState(false);
+    const [isFilled, setIsFilled] = useState(false);
+
+//  por não especificar o tipo passado no campo de parâmetros
+//  o tipo é passado no estado, como string:
+    const [name, setName] = useState<string>();
+
+    function handleInputBlur(){
+        setIsFocused(false);
+        setIsFilled(!! name);
+    }
+    function handleInputFocus(){
+        setIsFocused(true);
+    }
+
+    function handleInputChange(value: string){
+        setIsFilled(!! value);
+        setName(value);
+    }
+
     return (
         <View style={style.container}>
-            <TextInput style={style.senha}>
-                {title}
+            <TextInput 
+                style={style.senha}
+                placeholder="Senha"
+                placeholderTextColor={colors.white}
+            >
             </TextInput>
 
             <Entypo

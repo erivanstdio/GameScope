@@ -1,13 +1,20 @@
 import content from '*.png';
-import React from 'react';
+import React, {useState} from 'react';
 import { 
     SafeAreaView, 
     StyleSheet, 
     View, 
     Text,
-    TextInput
+    TextInput,
+    KeyboardAvoidingView,
+    Platform,
+    TouchableWithoutFeedback,
+    Keyboard
 } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
+
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+
 
 import { Button } from '../components/Button';
 import { ButtonScope } from '../components/ButtonScope';
@@ -17,33 +24,84 @@ import fonts from '../styles/fonts';
 
 
 export function UserIdentification(){
+    
+    const navigation = useNavigation();
+
+    
+    const [isFocused, setIsFocused] = useState(false);
+    const [isFilled, setIsFilled] = useState(false);
+
+//  por não especificar o tipo passado no campo de parâmetros
+//  o tipo é passado no estado, como string:
+    const [name, setName] = useState<string>();
+
+    function handleInputBlur(){
+        setIsFocused(false);
+        setIsFilled(!! name);
+    }
+    function handleInputFocus(){
+        setIsFocused(true);
+    }
+
+    function handleInputChange(value: string){
+        setIsFilled(!! value);
+        setName(value);
+    }
+
+
+
+    function handleSubmition(){
+        navigation.navigate("Confirmation");
+    }
+
+    function handleWelcome(){
+        navigation.navigate("Welcome")
+    }
+
     return(
         <SafeAreaView style={style.container}>
-            <View style={style.content}>
-                
-                <View style={style.form}>
-                    
-                    <Text style={style.emoji}>
-                        🤠
-                    </Text>
-                    
-                    <Text style={style.title}>
-                        Como podemos {'\n'}
-                        te chamar?
-                    </Text>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                <KeyboardAvoidingView
+                    style={style.container}
+                    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                >    
+                    <View style={style.content}>
+                        
+                        <View style={style.form}>
+                            
+                            <Text style={style.emoji}>
+                                {isFilled? '🤠' : '🍆'}
+                            </Text>
+                            
+                            <Text style={style.title}>
+                                Como podemos {'\n'}
+                                te chamar?
+                            </Text>
 
-                    <TextInput 
-                    style={style.input}
-                    placeholder="Digite um nome seu corno"
-                    placeholderTextColor={colors.placeHolder}
-                    />
+                            <TextInput 
+                                style={[
+                                        style.input,
+                                        (isFocused || isFilled) && { borderColor: colors.neonBlue}
+                                    ]}
+                                placeholder="Digite um nome seu corno"
+                                placeholderTextColor={colors.placeHolder}
+                                onBlur={handleInputBlur}
+                                onFocus={handleInputFocus}
+                                onChangeText={handleInputChange}
+                            />
 
-                    <View style={style.footer}>
-                        <Button title="Confirma ai doido"/>    
+                            <View style={style.footer}>
+                                <Button title="Confirma ai doido" onPress={handleSubmition}/>    
+                            </View>
+
+                            <View style={style.voltar}>
+                                <Button title="<" onPress={handleWelcome}/>
+                            </View>
+
+                        </View>
                     </View>
-
-                </View>
-            </View>
+                </KeyboardAvoidingView>
+            </TouchableWithoutFeedback>        
         </SafeAreaView>
 
     )
@@ -62,6 +120,7 @@ const style = StyleSheet.create({
         width: '100%'
     },
     title: {
+        marginTop: 20,
         textAlign: 'center',
         fontSize: 24,
         lineHeight:32,
@@ -78,7 +137,6 @@ const style = StyleSheet.create({
         fontSize: 44,
     },
     input: {
-    
         borderBottomWidth: 1,
         borderColor: 'gray',
         color: 'white',
@@ -89,9 +147,14 @@ const style = StyleSheet.create({
         textAlign: 'center'
     },
     footer: {
-        marginTop: 40
+        marginTop: 40,
+        paddingHorizontal: 20,
     },
     placeHolder: {
 
+    },
+    voltar: {
+        marginTop: 80,
+        marginBottom: -80
     }
 });
