@@ -30,8 +30,15 @@ export function Welcome(){
         navigation.navigate('UserIdentification');
     }
 
+    function handleHomeScope(){
+        navigation.navigate('HomeScope');
+    }
+
     return(
         <SafeAreaView style={style.container}>
+            <TouchableOpacity onPress={handleHomeScope} style={style.botaoHome}>
+                <Text>{'<'}</Text>
+            </TouchableOpacity>
             <View style={style.wrapper}>
                 <Text style={style.title}>
                     Bem vindo!    
@@ -77,7 +84,14 @@ StyleSheet.create({
         justifyContent: 'space-around',
         alignItems: 'center'
     },
-
+    botaoHome:{
+        backgroundColor: 'red',
+        width: 50,
+        height: 50,
+        alignItems: 'center',
+        borderColor: 'blue',
+        borderWidth: 1
+    },
     image:{
         marginTop: -50,
         marginBottom: -50,

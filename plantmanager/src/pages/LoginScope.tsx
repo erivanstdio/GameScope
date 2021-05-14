@@ -4,7 +4,7 @@ import {
     Image, 
     SafeAreaView, 
     View, 
-    Text, 
+    Text,
     StyleSheet, 
     TextInput,
     Dimensions,

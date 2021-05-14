@@ -7,6 +7,7 @@ import { Confirmation } from '../pages/Confirmation';
 import { LoginScope } from '../pages/LoginScope';
 
 import colors from '../styles/colors';
+import { HomeScope } from '../pages/HomeScope';
 
 
 //criando uma pilha de navegação
@@ -29,6 +30,11 @@ const AppRoutes: React.FC = () => (
             name="Welcome"
         // devolva esse componente
             component={Welcome}
+        />
+
+        <stackRoutes.Screen
+            name="HomeScope"
+            component={HomeScope}
         />
 
         <stackRoutes.Screen
