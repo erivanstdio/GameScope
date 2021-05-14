@@ -18,8 +18,15 @@ import iconImg from '../../assets/icon.png';
 
 import {Input, InputSenha} from '../components/Input';
 import { ButtonScope } from '../components/ButtonScope';
+import { useNavigation } from '@react-navigation/core';
 
 export function LoginScope(){
+
+    const navigation = useNavigation();
+
+    function handleHomeScope(){
+        navigation.navigate("HomeScope");
+    }
 
     return(
         <SafeAreaView style={style.container}>
@@ -41,7 +48,10 @@ export function LoginScope(){
                     <Text style={style.forgot}>Esqueceu a senha?</Text>
                 </TouchableOpacity>
                 <View style={style.containerButton}>
-                <ButtonScope title={'Login'}/>
+                <ButtonScope 
+                    title={'Login'}
+                    onPress={handleHomeScope}    
+                />
                 </View>
                 <View style={style.footer}>
                     <Text style={style.naoPossui}>Ainda não possui conta?</Text>

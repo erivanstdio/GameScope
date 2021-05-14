@@ -19,6 +19,7 @@ import colors from '../styles/colors';
 import { Feather } from '@expo/vector-icons';
 import iconImg from '../../assets/icon.png';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { LoginScope } from './LoginScope';
 
 
 
@@ -30,13 +31,13 @@ export function Welcome(){
         navigation.navigate('UserIdentification');
     }
 
-    function handleHomeScope(){
-        navigation.navigate('HomeScope');
+    function handleLoginScope(){
+        navigation.navigate('LoginScope');
     }
 
     return(
         <SafeAreaView style={style.container}>
-            <TouchableOpacity onPress={handleHomeScope} style={style.botaoHome}>
+            <TouchableOpacity onPress={handleLoginScope} style={style.botaoHome}>
                 <Text>{'<'}</Text>
             </TouchableOpacity>
             <View style={style.wrapper}>

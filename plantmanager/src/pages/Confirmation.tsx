@@ -18,8 +18,8 @@ export function Confirmation(){
 
     const navigation = useNavigation();
 
-    function handleScope(){
-        navigation.navigate("LoginScope");
+    function handlePlantSelect(){
+        navigation.navigate("PlantSelect");
     }
 
     function handleUserIdentification(){
@@ -46,7 +46,7 @@ export function Confirmation(){
                 <View style={style.footer}>
                     <Button 
                         title={"Prossiga, corno"}
-                        onPress={handleScope}
+                        onPress={handlePlantSelect}
                     />
                 </View>
 
