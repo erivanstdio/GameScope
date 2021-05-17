@@ -1,0 +1,140 @@
+{
+    "plants_water_frequencies": [
+        {"key": "day", "title": "Todos os dias"},
+        {"key": "week", "title": "A cada semana"}
+    ],
+    
+    "plants_environments": [
+        {"key": "living_room", "title": "Sala"},
+        {"key": "bedroom", "title": "Quarto"},
+        {"key": "kitchen", "title": "Cozinha"},
+        {"key": "bathroom", "title": "Banheiro"}
+    ],
+
+    "plants": [
+        {
+            "id": 1,
+            "name": "Aningapara",
+            "about": "É uma espécie tropical que tem crescimento rápido e bla bla bla",
+            "water_tips": "Mantenha a terra sempre úmida sem encharcar. Regue blabla",
+            "photo": "https://storage.googleapis.com/golden-wind/nextlevelweek/05-plantmanager/1.svg",
+            "environments": ["living_room", "kitchen"],
+            "frequency": {
+                "times": 2,
+                "repeat_every": "week"
+            }
+        },
+        {
+            "id": 2,
+            "name": "Zamioculca",
+            "about": "É uma espécie tropical que tem crescimento rápido e bla bla bla",
+            "water_tips": "Mantenha a terra sempre úmida sem encharcar. Regue blabla",
+            "photo": "https://storage.googleapis.com/golden-wind/nextlevelweek/05-plantmanager/2.svg",
+            "environments": ["living_room", "kitchen"],
+            "frequency": {
+                "times": 1,
+                "repeat_every": "day"
+            }
+        },
+        {
+            "id": 3,
+            "name": "Peperomia",
+            "about": "Adapta-se tanto ao sol quanto à sombra",
+            "water_tips": "Nos dias mais quentes borrife água nas folhas",
+            "photo": "https://storage.googleapis.com/golden-wind/nextlevelweek/05-plantmanager/3.svg",
+            "environments": ["bedroom"],
+            "frequency": {
+                "times": 3,
+                "repeat_every": "week"
+            }
+        },
+        {
+            "id": 4,
+            "name": "Imbé",
+            "about": "De médio porte que se adapta a diversas regiões",
+            "water_tips": "Mantenha a terra sempre úmida sem encharcar. Regue blabla",
+            "photo": "https://storage.googleapis.com/golden-wind/nextlevelweek/05-plantmanager/4.svg",
+            "environments": ["bedroom", "living_room"],
+            "frequency": {
+                "times": 2,
+                "repeat_every": "week"
+            }
+        },
+        {
+            "id": 5,
+            "name": "Espada São Jorge",
+            "about": "O aroma reduz os níveis de ansiedade",
+            "water_tips": "Regue o solo ao redor, 1 vez ao dia.",
+            "photo": "https://storage.googleapis.com/golden-wind/nextlevelweek/05-plantmanager/5.svg",
+            "environments": ["bedroom", "living_room"],
+            "frequency": {
+                "times": 1,
+                "repeat_every": "day"
+            }
+        },
+        {
+            "id": 6,
+            "name": "Yucca",
+            "about": "São indicadas pois são fáceis de manter e cuidar.",
+            "water_tips": "Graças à reserva de água elas conseguem fazer seilaoq",
+            "photo": "https://storage.googleapis.com/golden-wind/nextlevelweek/05-plantmanager/6.svg",
+            "environments": ["kitchen", "bedroom"],
+            "frequency": {
+                "times": 1,
+                "repeat_every": "week"
+            }
+        },
+        {
+            "id": 7,
+            "name": "Frutíferas",
+            "about": "Exigem algumas horinhas de sol por dia",
+            "water_tips": "Regue sempre na terra e não as folhas",
+            "photo": "https://storage.googleapis.com/golden-wind/nextlevelweek/05-plantmanager/7.svg",
+            "environments": ["kitchen", "living_room"],
+            "frequency": {
+                "times": 3,
+                "repeat_every": "week"
+            }
+        },
+        {
+            "id": 8,
+            "name": "Orquídea",
+            "about": "Traz sensação de tranquilidade e paz ao ambiente. Requer pouca manutenção.",
+            "water_tips": "Regue moderamente, 4 vezes por semana.",
+            "photo": "https://storage.googleapis.com/golden-wind/nextlevelweek/05-plantmanager/8.svg",
+            "environments": ["bathroom"],
+            "frequency": {
+                "times": 4,
+                "repeat_every": "week"
+            }
+        },
+        {
+            "id": 9,
+            "name": "Jurema",
+            "about": "Tem uns espinhos e tal",
+            "water_tips": "Consegue sobreviver a climas secos e áridos",
+            "photo": "https://storage.googleapis.com/golden-wind/nextlevelweek/05-plantmanager/9.svg",
+            "environments": ["living_room"],
+            "frequency": {
+                "times": 1,
+                "repeat_every": "week"
+            }
+        },
+        {
+            "id": 10,
+            "name": "Pé de tomate",
+            "about": "Fonte de vida ae",
+            "water_tips": "Regue todo dia",
+            "photo": "https://storage.googleapis.com/golden-wind/nextlevelweek/05-plantmanager/10.svg",
+            "environments": ["kitchen"],
+            "frequency": {
+                "times": 1,
+                "repeat_every": "day"
+            }
+        }
+    ]
+
+
+
+    
+}
