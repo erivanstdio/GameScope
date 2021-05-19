@@ -1,4 +1,4 @@
-{
+ {
     "plants_water_frequencies": [
         {"key": "day", "title": "Todos os dias"},
         {"key": "week", "title": "A cada semana"}
@@ -110,10 +110,10 @@
         },
         {
             "id": 9,
-            "name": "Jurema",
+            "name": "Violeta",
             "about": "Tem uns espinhos e tal",
             "water_tips": "Consegue sobreviver a climas secos e áridos",
-            "photo": "https://storage.googleapis.com/golden-wind/nextlevelweek/05-plantmanager/9.svg",
+            "photo": "https://storage.googleapis.com/golden-wind/nextlevelweek/05-plantmanager/3.svg",
             "environments": ["living_room"],
             "frequency": {
                 "times": 1,
@@ -122,10 +122,10 @@
         },
         {
             "id": 10,
-            "name": "Pé de tomate",
+            "name": "Hortência",
             "about": "Fonte de vida ae",
             "water_tips": "Regue todo dia",
-            "photo": "https://storage.googleapis.com/golden-wind/nextlevelweek/05-plantmanager/10.svg",
+            "photo": "https://storage.googleapis.com/golden-wind/nextlevelweek/05-plantmanager/2.svg",
             "environments": ["kitchen"],
             "frequency": {
                 "times": 1,

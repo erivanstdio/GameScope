@@ -46,7 +46,7 @@ const style = StyleSheet.create({
         backgroundColor: colors.grey,
         justifyContent: 'center',
         alignItems: 'center',
-        marginRight: 5
+        marginHorizontal: 5
     },
     containerActive: {
         backgroundColor: colors.activeGreenBox

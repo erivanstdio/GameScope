@@ -13,19 +13,54 @@ import colors from '../styles/colors';
 import { Header } from '../components/Header';
 import { EnvironmentButton } from '../components/EnvironmentButton'
 import api from '../services/api';
+import { PLantCardPrimary } from '../components/PlantCardPrimary';
 
 interface EnvironmentProps {
     key: string;
     title: string;
 }
 
+interface PlantProps {
+    id: string;
+    name: string;
+    about: string;
+    water_tips: string;
+    photo: string;
+    environments: [string];
+    frequency: {
+        times: number;
+        repeat_every: string;
+    }
+}
+
 export function PlantSelect(){
 
     const [environments, setEnvironments] = useState<EnvironmentProps[]>([]);
+    const [plants, setPlants] = useState<PlantProps[]>([]);
+    //criando estado auxiliar de filtros para não puxar muitas vezes pela API
+    const [filteredPlants, setFilteredPlants] = useState<PlantProps[]>([]);
+    const [environmentSelected, setEnvironmentSelected] = useState('all');
+
+    
+    function handleEnvironmentSelected(environment: string){
+        setEnvironmentSelected(environment);
+        // caso eu queira todas as plantas:
+        if(environment === 'all')
+        return setFilteredPlants(plants);
+        
+        
+        const filtered = plants.filter(plant =>
+            plant.environments.includes(environment)
+        );
+
+        setFilteredPlants(filtered);
+    }
 
     useEffect(() =>{
         async function fetchEnvironment() {
-            const { data } = await api.get("plants_environments");
+            const { data } = await api.get("plants_environments?_sort=title&_order=asc");
+            // após consumir os dados acima ^
+            // salvar os dados no estado:
             setEnvironments([
                 {
                     key: 'all',
@@ -34,10 +69,37 @@ export function PlantSelect(){
                 ...data
             ]);
         }
-
         fetchEnvironment();
-
     }, [])
+
+    useEffect(() => {
+        async function fetchPlant() {
+            const { data } = await api.get("plants?_sort=name&_order=asc?");
+            setPlants(data);
+            setFilteredPlants(data);
+        }
+        fetchPlant();
+    }, []);
+
+    // useEffect(() => {
+    //     // EXECUTA QUANDO environments OU plants MUDAREM
+    // }, [environments, plants]);
+    
+    // useEffect(() => {
+    //     // EXECUTA UMA VEZ QUANDO O COMPONENTE É MONTADO
+    // }, []);
+
+    // useEffect(() => {
+    //     // EXECUTADO TODA HORA
+    // });
+
+    // useEffect(() => {
+    //     // EXECUTADO QUANDO O COMPONENTE É DESMONTADO (MORRE) 
+
+    //     return () => {
+    //         console.log('Componente morreu');
+    //     }
+    // }, []);
 
     return(
         <View style={style.container}>
@@ -54,14 +116,32 @@ export function PlantSelect(){
                 <FlatList
                     data={environments}
                     renderItem={({ item }) => ( 
-                        <EnvironmentButton title={item.title} />
+                        <EnvironmentButton 
+                            title={item.title} 
+                            active={ item.key === environmentSelected}
+                            onPress={()=> handleEnvironmentSelected(item.key)}
+                        />
                     )}
                     horizontal
                     showsHorizontalScrollIndicator={false}
                     contentContainerStyle={style.environmentList}
                 />
             </View>
-            
+
+            <View style={style.plants}>
+
+                <FlatList
+                    data={filteredPlants}
+                    renderItem={({ item }) => (
+                        <PLantCardPrimary 
+                            data={ item }
+                        />
+                    )}
+                    showsVerticalScrollIndicator={false}
+                    numColumns={2}
+                />
+
+            </View>
         </View>
     )
 }
@@ -94,6 +174,10 @@ const style = StyleSheet.create({
         paddingBottom: 5,
         marginLeft: 32,
         marginVertical: 32
+    },
+    plants:{
+        flex: 1,
+        paddingHorizontal: 32,
+        justifyContent: 'center'
     }
-
 })
