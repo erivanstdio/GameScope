@@ -3,17 +3,21 @@ import {
     Text,
     View,
     StyleSheet,
-    FlatList
+    FlatList,
+    ActivityIndicator
 } from 'react-native';
-
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
+
+import { Load } from '../components/Load';
+import { PlantLoad } from '../components/PlantLoad';
+import { EnvironmentButton } from '../components/EnvironmentButton'
+import { PLantCardPrimary } from '../components/PlantCardPrimary';
+
+import api from '../services/api';
 
 import fonts from '../styles/fonts';
 import colors from '../styles/colors';
 import { Header } from '../components/Header';
-import { EnvironmentButton } from '../components/EnvironmentButton'
-import api from '../services/api';
-import { PLantCardPrimary } from '../components/PlantCardPrimary';
 
 interface EnvironmentProps {
     key: string;
@@ -36,11 +40,45 @@ interface PlantProps {
 export function PlantSelect(){
 
     const [environments, setEnvironments] = useState<EnvironmentProps[]>([]);
+
     const [plants, setPlants] = useState<PlantProps[]>([]);
     //criando estado auxiliar de filtros para não puxar muitas vezes pela API
     const [filteredPlants, setFilteredPlants] = useState<PlantProps[]>([]);
-    const [environmentSelected, setEnvironmentSelected] = useState('all');
 
+    const [environmentSelected, setEnvironmentSelected] = useState('all');
+    // por padrão ele vai estar carregando
+    const [loading, setLoading] = useState(true);
+
+    // pagina atual
+    const [page,setPage] = useState(1);
+    // tem mais pra carregar?
+    const [loadingMore,setLoadingMore] = useState(true);
+    // carregou tudo?
+    const [loadAll, setLoadAll] = useState(false);
+
+    async function fetchPlant() {
+        // adicionado crase para fazer a interpolação ( `%% ${page} %%` ) 
+        // para colocar o conteúdo de um estado, no caso para saber qual a página atual
+        const { data } = await api.get(`plants?_sort=name&_order=asc&_page=${page}&_limit=8`);
+
+        // se não tiver nada pra carregar:
+        if (!data)
+        // já carregou tudo como verdadeiro
+            return setLoading(true);
+
+        // Recupera os dados armazenados anteriormente no estado
+        // e juntando com os novos dados
+        if (page > 1) {
+            setPlants(oldValue => [...oldValue, ...data])
+            setFilteredPlants(oldValue => [...oldValue, ...data])
+        } else {
+            setPlants(data);
+            setFilteredPlants(data);
+        }
+
+        setLoading(false); // será usado para a animação padrão
+        setLoadingMore(false);
+    }
     
     function handleEnvironmentSelected(environment: string){
         setEnvironmentSelected(environment);
@@ -54,6 +92,15 @@ export function PlantSelect(){
         );
 
         setFilteredPlants(filtered);
+    }
+
+    function handleFetchMore(distance: number){
+        if(distance < 1) // nesse caso a rolagem está sendo feita para cima
+            return;
+        // então implica dizer que há elementos a serem carregados
+        setLoadingMore(true);
+        setPage(oldValue => oldValue + 1);
+        fetchPlant();
     }
 
     useEffect(() =>{
@@ -73,11 +120,6 @@ export function PlantSelect(){
     }, [])
 
     useEffect(() => {
-        async function fetchPlant() {
-            const { data } = await api.get("plants?_sort=name&_order=asc?");
-            setPlants(data);
-            setFilteredPlants(data);
-        }
         fetchPlant();
     }, []);
 
@@ -100,6 +142,14 @@ export function PlantSelect(){
     //         console.log('Componente morreu');
     //     }
     // }, []);
+
+    
+    // if(Boolean(loading) === true) {
+    //     return <Load />;
+    // }
+
+    if(loading)
+        return<PlantLoad />;
 
     return(
         <View style={style.container}>
@@ -139,6 +189,14 @@ export function PlantSelect(){
                     )}
                     showsVerticalScrollIndicator={false}
                     numColumns={2}
+                    onEndReachedThreshold={0.1}
+                    onEndReached={({ distanceFromEnd }) => 
+                        handleFetchMore(distanceFromEnd)
+                    }
+                    ListFooterComponent={
+                        loadingMore ? <ActivityIndicator color={"green"}/>
+                        : <></>
+                    }
                 />
 
             </View>
