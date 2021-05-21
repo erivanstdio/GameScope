@@ -1,25 +1,23 @@
-import content from '*.png';
-import React, {useState} from 'react';
-import { 
-    SafeAreaView, 
-    StyleSheet, 
-    View, 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/core';
+import React, { useState } from 'react';
+import {
+    Alert, Keyboard, KeyboardAvoidingView,
+    Platform, SafeAreaView,
+    StyleSheet,
+
     Text,
     TextInput,
-    KeyboardAvoidingView,
-    Platform,
-    TouchableWithoutFeedback,
-    Keyboard
+
+
+    TouchableWithoutFeedback, View
 } from 'react-native';
-import { useNavigation } from '@react-navigation/core';
-
-import { Colors } from 'react-native/Libraries/NewAppScreen';
-
-
 import { Button } from '../components/Button';
-import { ButtonScope } from '../components/ButtonScope';
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
+
+
+
 
 
 
@@ -50,7 +48,14 @@ export function UserIdentification(){
 
 
 
-    function handleSubmition(){
+    async function handleSubmit(){
+
+        if(!name)
+            return Alert.alert('Digite um nome, seu corno! 😃');
+
+        // @nomeDoApp:oQueEstáSendoSalvo, valor a ser salvo
+        await AsyncStorage.setItem('@plantmanager:user', name);
+    
         navigation.navigate("Confirmation");
     }
 
@@ -91,7 +96,7 @@ export function UserIdentification(){
                             />
 
                             <View style={style.footer}>
-                                <Button title="Confirma ai doido" onPress={handleSubmition}/>    
+                                <Button title="Confirma ai doido" onPress={handleSubmit}/>    
                             </View>
 
                             <View style={style.voltar}>

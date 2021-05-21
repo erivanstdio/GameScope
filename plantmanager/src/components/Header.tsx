@@ -1,22 +1,36 @@
-import React from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useEffect, useState } from 'react';
 import {
-    StyleSheet,
+    Image, StyleSheet,
     Text,
-    Image,
     View
 } from 'react-native';
-import { getStatusBarHeight } from 'react-native-iphone-x-helper'
-import colors from '../styles/colors';
-
+import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 import userImg from '../../assets/profile.jpeg';
+import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 
+
 export function Header(){
+    const [userName, setUserName] = useState<string>();
+
+    useEffect (() => {
+        async function loadStorageUserName() {
+            const user = await AsyncStorage.getItem('@plantmanager:user');
+            // se tiver algo armazenado no user, coloca o que tá armazenado
+            // senão, vai uma string em branco
+            setUserName(user || '');          
+            
+            // mas por ter sido feita a validação, sempre terá algo lá...
+        }
+        loadStorageUserName();
+    }, []);
+
     return(
         <View style={style.container}>
             <View>
                 <Text style={style.greeting}>Olá,</Text>
-                <Text style={style.userName}>User</Text>
+                <Text style={style.userName}>{userName}</Text>
             </View>
             <Image source={userImg} style={style.image}/>
         </View>
